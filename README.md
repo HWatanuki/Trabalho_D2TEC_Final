@@ -41,13 +41,13 @@ Para os tratamentos e análises apresentados a seguir foram selecionados 2 arqui
 
 # c) Workflow
 A solução criada para a extração e estruturação dos dados de blockchain utilizou os seguintes componentes principais:
+- Azure Files Shares: https://azure.microsoft.com/en-us/products/storage/files/#overview
 - Azure Kubernetes Service (AKS): https://azure.microsoft.com/en-us/products/kubernetes-service/
 - High Performance Computing Cluster (HPCC Systems): https://hpccsystems.com/
 
 O diagrama de arquitetura é apresentado abaixo:
 
-![image](https://user-images.githubusercontent.com/50485300/200107439-bf0d4e86-3b02-4c0d-ab3d-927c3134d172.png)
-
+![image](https://user-images.githubusercontent.com/50485300/202923133-78e694fe-7173-4ff9-8623-a18dd71eaa9c.png)
 
 # d) Infraestrutura
 A infrastrutura foi criada na região EastUS2 e envolveu os seguintes recursos:
@@ -56,7 +56,7 @@ A infrastrutura foi criada na região EastUS2 e envolveu os seguintes recursos:
 
 ![image](https://user-images.githubusercontent.com/50485300/202887061-5d422204-c18e-4a51-9e85-128acc07fa0b.png)
 
-- 5 file shares com storage general-purpose V2 totalizando 180 GB para armazenamento de dados com redundância local (https://azure.microsoft.com/en-us/products/storage/files/#overview):
+- 1 storage account general-purpose V2 com redundância local contendo 5 file shares totalizando 180 GB para armazenamento de dados (https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview):
 
 ![image](https://user-images.githubusercontent.com/50485300/202886874-6e4a6598-1806-4059-87d3-880521da2648.png)
 
@@ -201,6 +201,8 @@ Caso a remoção via Terraform falhe por algum motivo, você pode remover os rec
 
 # f) Referências
 
-
-Le Calvez, Antoine. "A Python 3 Bitcoin blockchain parser". Disponível em: https://github.com/alecalve/python-bitcoin-blockchain-parser
-Walker, Greg. "How Does Bitcoin Work". Disponível em: https://learnmeabitcoin.com/
+Monaco, J. (2015). Identifying Bitcoin users by transaction behavior. Disponível em: https://www.researchgate.net/publication/277248535_Identifying_Bitcoin_users_by_transaction_behavior
+Le Calvez, Antoine. A Python 3 Bitcoin blockchain parser. Disponível em: https://github.com/alecalve/python-bitcoin-blockchain-parser
+Shayegan, M. J., Sabor, H. R., Uddin, M., & Chen, C. L. (2022). A Collective Anomaly Detection Technique to Detect Crypto Wallet Frauds on Bitcoin Network. Symmetry, 14(2), 328.
+Xiang, Y. et al. (2022). BABD: A Bitcoin Address Behavior Dataset for Pattern Analysis. Disponível em: https://www.researchgate.net/profile/Yuexin-Xiang/publication/359918351_BABD_A_Bitcoin_Address_Behavior_Dataset_for_Pattern_Analysis/links/627482c1107cae29198d2a47/BABD-A-Bitcoin-Address-Behavior-Dataset-for-Pattern-Analysis.pdf
+Walker, Greg. How Does Bitcoin Work. Disponível em: https://learnmeabitcoin.com/
