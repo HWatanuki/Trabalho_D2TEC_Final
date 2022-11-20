@@ -14,7 +14,7 @@ O problema principal a ser endereçado por esse trabalho diz respeito à extraç
 
 O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain de maneira eficiente para posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. 
 
-Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem. Também foram utilizados conceitos de Infrastructure as a Code (IaC).
+Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem. A estratégia também focalizou a eficiência da implementação da infraestrutura por meio de conceitos de Infrastructure as a Code (IaC).
 
 # b) Descrição dos dados
 A base de dados utilizada no trabalho corresponde ao blockchain de bitcoin (~7 GB). O blockchain, por sua vez, é armazenado em arquivos binários blk.dat localizados nos nós computacionais pertencentes à rede de bitcoin (https://bitcoin.org/en/download). Cada arquivo blk.dat (~128 MB) contém blocos de dados brutos que são recebidos pelo nó da rede de bitcoin e ficam armazenados no diretório ~/.bitcoin/blocks/:
@@ -105,8 +105,9 @@ Visualizacao do dataset estruturado
 
 ![image](https://user-images.githubusercontent.com/50485300/202889051-2d77eff2-0c8e-40ea-95d1-b205aa4fcf43.png)
 
+4) Visualização dos 10 endereços que mais receberam transacoes de bitcoin
 
-
+![image](https://user-images.githubusercontent.com/50485300/202889490-f1cfd324-badc-4edc-9e67-3168e36b5182.png)
 
 # g) Cleanup
 Como a implementação da infraestrutura foi feita via Terraform, para a remoção dos recursos utilizados na Azure basta utilizar o comando "terraform destroy" a partir de cada subdiretório que contém os códigos para implementaçao do storage e do AKS.
