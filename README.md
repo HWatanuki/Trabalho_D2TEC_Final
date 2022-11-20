@@ -35,7 +35,7 @@ E cada bloco constituinte do arquivo blk.dat possui uma estrutura binária que p
 - Tx count: número de transações existentes no bloco
 - Transaction data: hash das informações das transações
 
-Para os tratamentos e análises apresentados a seguir foram selecionados 2 arquivos blk.dat, os quais contém pouco mais de 5 milhões de transações. Os arquivos blk.dat utilizados estão disponibilizados aqui: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Descricao_Dados
+Para os tratamentos e análises apresentados a seguir foram selecionados 2 arquivos blk.dat apenas para efeito de ilustração, os quais contém pouco mais de 5 milhões de transações. Os arquivos blk.dat utilizados estão disponibilizados aqui: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Descricao_Dados
 
 # c) Workflow
 A solução criada para a extração e estruturação dos dados de blockchain utilizou os seguintes componentes principais:
@@ -108,6 +108,16 @@ Visualização do dataset estruturado
 4) Visualização dos 10 endereços que mais receberam transações de bitcoin
 
 ![image](https://user-images.githubusercontent.com/50485300/202889490-f1cfd324-badc-4edc-9e67-3168e36b5182.png)
+
+5) Endpoint para consulta das transações dentro de valores min/max:
+
+![image](https://user-images.githubusercontent.com/50485300/202890977-75eef9ff-689a-42d1-ab0c-6d3555cdb4f5.png)
+
+URL: http://20.7.99.254:8002/WsEcl/forms/ecl/query/hthor/search_transactions
+
+![image](https://user-images.githubusercontent.com/50485300/202890999-799b578c-df9b-499d-b574-fd60b5368d53.png)
+
+![image](https://user-images.githubusercontent.com/50485300/202890959-d9608090-3616-4dc8-8703-045645c7b2ce.png)
 
 # g) Cleanup
 Como a implementação da infraestrutura foi feita via Terraform, para a remoção dos recursos utilizados na Azure basta utilizar o comando "terraform destroy" a partir de cada subdiretório que contém os códigos para implementaçao do storage e do AKS.
