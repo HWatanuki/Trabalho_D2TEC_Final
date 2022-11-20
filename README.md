@@ -12,6 +12,8 @@ A demonstração do passo a passo completo para a construção dessa infraestrut
 # a) Introdução
 O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários de blockchain. 
 
+![image](https://user-images.githubusercontent.com/50485300/202918868-de46ac2c-2253-4a99-a4bc-bab6590e7bd7.png)
+
 O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain para seu posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. O foco nesse momento é estabelecer a infraestrutura capaz de fazer a extração e estruturação das informações de transações de bitcoin de maneira eficiente e automatizada.
 
 Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem. A estratégia também focalizou a eficiência da implementação da infraestrutura por meio de conceitos de Infrastructure as a Code (IaC).
@@ -145,9 +147,9 @@ Visualizacao do blob em formato hexadecimal:
 
  O schema do dataset de transações de bitcoin a ser obtido do blob possui a seguinte estrutura:
 
-    STRING  tx_hash;   // hash da transacao
-    INTEGER in_index;  // indice da transacao
-    STRING  in_hash;   // hash do input da transacao
+    STRING  tx_hash;   // hash da transacao entre input e output
+    INTEGER in_index;  // out_index da transacao do input
+    STRING  in_hash;   // hash da transacao do input
     INTEGER out_index; // indice do output da transacao
     STRING  out_addr;  // endereco do output da transacao
     INTEGER out_val;   // valor em bitcoin negociado
@@ -199,4 +201,6 @@ Caso a remoção via Terraform falhe por algum motivo, você pode remover os rec
 
 # f) Referências
 
+
+Le Calvez, Antoine. "A Python 3 Bitcoin blockchain parser". Disponível em: https://github.com/alecalve/python-bitcoin-blockchain-parser
 Walker, Greg. "How Does Bitcoin Work". Disponível em: https://learnmeabitcoin.com/
