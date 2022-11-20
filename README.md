@@ -12,7 +12,7 @@ A demonstração do passo a passo completo para a construção dessa infraestrut
 # a) Introdução
 O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários de blockchain. 
 
-O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain de maneira eficiente para posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. 
+O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain para seu posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. O foco nesse momento é estabelecer a infraestrutura capaz de fazer a extração e estruturação das informações de transações de bitcoin de maneira eficiente e automatizada.
 
 Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem. A estratégia também focalizou a eficiência da implementação da infraestrutura por meio de conceitos de Infrastructure as a Code (IaC).
 
@@ -87,7 +87,7 @@ Visualizacao do blob em formato hexadecimal:
 
 2) Extração dos dados primários do blob e estruturação em formato relacional:
 
- O schema do dataset de transacoes de bitcoin a ser obtido do blob possui a seguinte estrutura:
+ O schema do dataset de transações de bitcoin a ser obtido do blob possui a seguinte estrutura:
 
     STRING  tx_hash;   // hash da transacao
     INTEGER in_index;  // indice da transacao
@@ -97,7 +97,7 @@ Visualizacao do blob em formato hexadecimal:
     INTEGER out_val;   // valor em bitcoin negociado
     STRING  timestamp; // data da transacao
 
-Visualizacao do dataset estruturado
+Visualização do dataset estruturado
 
 ![image](https://user-images.githubusercontent.com/50485300/202888627-7bc61878-72f9-48a6-b06b-b48adac9fa7d.png)
 
@@ -105,7 +105,7 @@ Visualizacao do dataset estruturado
 
 ![image](https://user-images.githubusercontent.com/50485300/202889051-2d77eff2-0c8e-40ea-95d1-b205aa4fcf43.png)
 
-4) Visualização dos 10 endereços que mais receberam transacoes de bitcoin
+4) Visualização dos 10 endereços que mais receberam transações de bitcoin
 
 ![image](https://user-images.githubusercontent.com/50485300/202889490-f1cfd324-badc-4edc-9e67-3168e36b5182.png)
 
