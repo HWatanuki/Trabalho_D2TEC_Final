@@ -5,7 +5,7 @@ Trabalho final da disciplina D2TEC - Tecnologias de Big Data do curso de Especia
 - Hugo Martinelli Watanuki
 
 # ETL de dados blockchain usando infraestrutura Azure
-O objetivo deste repositório é fornecer um conjunto de instruções, arquivos de configuração e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos da Azure. 
+O objetivo deste repositório é fornecer um conjunto de instruções e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos de IaC (Infrasctruture as a Code) na Azure. 
 
 A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
 
@@ -35,7 +35,7 @@ E cada bloco constituinte do arquivo blk.dat possui uma estrutura binária que p
 - Tx count: número de transações existentes no bloco
 - Transaction data: hash das informações das transações
 
-Para os tratamentos e análises apresentados a seguir foram selecionados 2 arquivos blk.dat, os quais contém pouco mais de 5 milhões de transações. Os arquivos blk.dat utilizados estão disponibilizados aqui:  https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Datasets
+Para os tratamentos e análises apresentados a seguir foram selecionados 2 arquivos blk.dat, os quais contém pouco mais de 5 milhões de transações. Os arquivos blk.dat utilizados estão disponibilizados aqui: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Descricao_Dados
 
 # c) Workflow
 A solução criada para a extração e estruturação dos dados de blockchain utilizou os seguintes componentes principais:
@@ -67,15 +67,15 @@ A infrastrutura foi criada na região EastUS2 e envolveu os seguintes recursos:
 ![image](https://user-images.githubusercontent.com/50485300/202887359-4d4e5ff9-948b-4f77-8040-c55981f8d481.png)
 
 # e) Setup
-Para a implementação da infraestrutura optou-se por utilizar um paradigma IaC por meio do Terraform (https://www.terraform.io/). Os códigos Terraform utilizados estão disponíveis em     e foram divididos em duas etapas principais: 
- 1) Implementação dos Azure File Shares:
- 2) Implementação do AKS/HPCC Systems: 
+Para a implementação da infraestrutura optou-se por utilizar um paradigma IaC por meio do Terraform (https://www.terraform.io/). Os códigos Terraform utilizados estão disponíveis em https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Setup e foram divididos em dois módulos principais: 
+ 1) Módulo de implementação dos Azure File Shares: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Setup/storage
+ 2) Módulo de implementação do AKS/HPCC Systems: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Setup/aks
 
 # f) Pipeline de dados
 O tratamento dos dados objetivou extrair e estruturar os dados primários de transações bitcoin presentes nos blocos dos arquivos blk.dat.
 Para isso, os arquivos blk.dat foram importados na plataforma HPCC Systems como Blob's (binary large object) e um código python foi utilizado como base para extrair e estruturar os dados primários contidos nos arquivos blk.dat.
 
-Os códigos utilizados para tratamento dos dados estão disponíveis aqui: https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Codigos
+Os códigos utilizados para tratamento dos dados estão disponíveis aqui: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Pipeline_Dados
 
 1) Importação dos arquivos blk.dat como blob:
 
