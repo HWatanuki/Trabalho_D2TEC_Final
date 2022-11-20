@@ -1,0 +1,7 @@
+eclagent:
+- name: hthor
+  replicas: 1
+  maxActive: 4
+  prefix: hthor
+  useChildProcesses: false
+  type: hthor

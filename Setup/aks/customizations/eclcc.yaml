@@ -1,0 +1,7 @@
+eclccserver:
+- name: myeclccserver
+  replicas: 1
+  useChildProcesses: false
+  childProcessTimeLimit: 300
+  maxActive: 4
+  listen: []
