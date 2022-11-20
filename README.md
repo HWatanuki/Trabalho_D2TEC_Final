@@ -5,7 +5,7 @@ Trabalho final da disciplina D2TEC - Tecnologias de Big Data do curso de Especia
 - Hugo Martinelli Watanuki
 
 # ETL de dados blockchain usando infraestrutura Azure
-O objetivo deste repositório é fornecer um conjunto de instruções e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos de IaC (Infrasctruture as a Code) na Azure. 
+O objetivo deste repositório é fornecer um conjunto de instruções e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos de IaC (Infrastructure as a Code) na Azure. 
 
 A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
 
@@ -14,7 +14,7 @@ O problema principal a ser endereçado por esse trabalho diz respeito à extraç
 
 ![image](https://user-images.githubusercontent.com/50485300/202920311-8ea4d4b1-5050-44da-b153-3fa055fd7ff8.png)
 
-O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain para seu posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. O foco nesse momento é estabelecer a infraestrutura capaz de fazer a extração e estruturação das informações de transações de bitcoin de maneira eficiente e automatizada.
+O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain para seu posterior uso em trabalho futuro, o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes (Monaco, 2015; Shayegan et al., 2022; Xiang et al., 2022). O foco nesse momento é estabelecer a infraestrutura capaz de fazer a extração e estruturação das informações de transações de bitcoin de maneira eficiente e automatizada.
 
 Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem. A estratégia também focalizou a eficiência da implementação da infraestrutura por meio de conceitos de Infrastructure as a Code (IaC).
 
@@ -196,8 +196,8 @@ Como a implementação da infraestrutura foi feita via Terraform, para a remoç�
 ## Instruções para remoção dos recursos via Azure Portal
 
 Caso a remoção via Terraform falhe por algum motivo, você pode remover os recursos manualmente:
-		* Faça login no Azure portal e remova os grupos de recursos manualmente.
-		* Remova todos os arquivos de estado do Terraform usando o comando `rm *.tfstate*` a partir do subdiretorio que contém os módulos a serem removidos.
+ * Faça login no Azure portal e remova os grupos de recursos manualmente.
+ * Remova todos os arquivos de estado do Terraform usando o comando `rm *.tfstate*` a partir do subdiretorio que contém os módulos a serem removidos.
 
 # f) Referências
 
