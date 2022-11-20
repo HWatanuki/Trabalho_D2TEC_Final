@@ -201,8 +201,8 @@ Caso a remoção via Terraform falhe por algum motivo, você pode remover os rec
 
 # f) Referências
 
-- Monaco, J. (2015). Identifying Bitcoin users by transaction behavior. Disponível em: https://www.researchgate.net/publication/277248535_Identifying_Bitcoin_users_by_transaction_behavior
 - Le Calvez, Antoine. A Python 3 Bitcoin blockchain parser. Disponível em: https://github.com/alecalve/python-bitcoin-blockchain-parser
-Shayegan, M. J., Sabor, H. R., Uddin, M., & Chen, C. L. (2022). A Collective Anomaly Detection Technique to Detect Crypto Wallet Frauds on Bitcoin Network. Symmetry, 14(2), 328.
-- Xiang, Y. et al. (2022). BABD: A Bitcoin Address Behavior Dataset for Pattern Analysis. Disponível em: https://www.researchgate.net/profile/Yuexin-Xiang/publication/359918351_BABD_A_Bitcoin_Address_Behavior_Dataset_for_Pattern_Analysis/links/627482c1107cae29198d2a47/BABD-A-Bitcoin-Address-Behavior-Dataset-for-Pattern-Analysis.pdf
+- Monaco, J. (2015). Identifying Bitcoin users by transaction behavior. Disponível em: https://www.researchgate.net/publication/277248535_Identifying_Bitcoin_users_by_transaction_behavior
+- Shayegan, M. J., Sabor, H. R., Uddin, M., & Chen, C. L. (2022). A Collective Anomaly Detection Technique to Detect Crypto Wallet Frauds on Bitcoin Network. Symmetry, 14(2), 328.
 - Walker, Greg. How Does Bitcoin Work. Disponível em: https://learnmeabitcoin.com/
+- Xiang, Y. et al. (2022). BABD: A Bitcoin Address Behavior Dataset for Pattern Analysis. Disponível em: https://www.researchgate.net/profile/Yuexin-Xiang/publication/359918351_BABD_A_Bitcoin_Address_Behavior_Dataset_for_Pattern_Analysis/links/627482c1107cae29198d2a47/BABD-A-Bitcoin-Address-Behavior-Dataset-for-Pattern-Analysis.pdf
