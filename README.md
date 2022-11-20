@@ -7,7 +7,7 @@ Trabalho final da disciplina D2TEC - Tecnologias de Big Data do curso de Especia
 # ETL de dados blockchain usando infraestrutura Azure
 O objetivo deste repositório é fornecer um conjunto de instruções e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos de IaC (Infrastructure as a Code) na Azure. 
 
-A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
+A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/I0N9riU77dU
 
 # a) Introdução
 O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários (hex) de blockchain. 
