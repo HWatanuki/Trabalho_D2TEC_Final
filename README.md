@@ -5,13 +5,22 @@ Trabalho final da disciplina D2TEC - Tecnologias de Big Data do curso de Especia
 - Hugo Martinelli Watanuki
 
 # ETL de dados blockchain usando infraestrutura AZURE
-O objetivo deste repositório é fornecer um conjunto de instruções, arquivos de configuração e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos da AZURE. A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
+O objetivo deste repositório é fornecer um conjunto de instruções, arquivos de configuração e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos da AZURE. 
 
-# a) Introducao
-O problema principal a ser endereçado por esse trabalho diz respeito à extraçao e estruturação de dados de transações de bitcoin a partir de arquivos binários de blockchain. O objetivo é extrair e estruturar as informações de transações de bitcoin de maneira eficiente para posterior análise dos padrões temporais das transaçoes por carteira de bitcoin com o intuito final de embasar decisões de identificação de fraudes. Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem.
+A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
 
-# b) Descricado dos dados
-A base de dados utilizada no trabalho foi a da Comissão de Taxi e Limousine da cidade de Nova York (https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). 
+# a) Introdução
+O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários de blockchain. 
+
+O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain de maneira eficiente para posterior análise dos padrões temporais das transações por carteira de bitcoin com o intuito final de embasar decisões de identificação de fraudes. 
+
+Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma estratégia de ETL apoiada em processamento paralelo e distribuido por meio de um paradigma de microserviços em nuvem.
+
+# b) Descrição dos dados
+A base de dados utilizada no trabalho corresponde ao blockchain de bitcoin (~7 GB). O blockchain, por sua vez, é armazenado em arquivos binários blk.dat localizados nos nós computacionais pertencentes à rede de bitcoin (https://bitcoin.org/en/download). Cada arquivo blk.dat (~128 MB) contém blocos de dados brutos que são recebidos pelo nó da rede de bitcoin e ficam armazenados no diretório ~/.bitcoin/blocks/:
+
+
+
 
 Essa base contém registros de viagens de passageiros de taxi da cidade de Nova York com os seguintes atributos:
 - Local, data e hora da partida e chegada de cada viagem
@@ -68,6 +77,9 @@ A solução criada foi baseada em um paradigma de microserviços em nuvem. Para 
 O diagrama de arquitetura AWS implementada é apresentado abaixo:
 
 ![image](https://user-images.githubusercontent.com/50485300/200107439-bf0d4e86-3b02-4c0d-ab3d-927c3134d172.png)
+
+   em formato blk.dat gerado pelo nó bitcoin e analisá-los em um conjunto de dados utilizável. Para isso adotamos uma estratégia em que utilizamos uma combinação de Python + ECL
+Os dados são primeiro analisados em uma forma intermediária com valores disponibilizados nos dados do bloco com recursos que incluem
 
 
 # b) Infraestrutura utilizada
