@@ -109,11 +109,7 @@ Visualização do dataset estruturado
 
 ![image](https://user-images.githubusercontent.com/50485300/202889490-f1cfd324-badc-4edc-9e67-3168e36b5182.png)
 
-5) Endpoint para consulta das transações dentro de valores min/max:
-
-![image](https://user-images.githubusercontent.com/50485300/202890977-75eef9ff-689a-42d1-ab0c-6d3555cdb4f5.png)
-
-URL: http://20.7.99.254:8002/WsEcl/forms/ecl/query/hthor/search_transactions
+5) Endpoint para consulta das transações dentro de valores min/max: http://20.7.99.254:8002/WsEcl/forms/ecl/query/hthor/search_transactions
 
 ![image](https://user-images.githubusercontent.com/50485300/202890999-799b578c-df9b-499d-b574-fd60b5368d53.png)
 
