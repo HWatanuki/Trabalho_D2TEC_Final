@@ -10,9 +10,9 @@ O objetivo deste repositório é fornecer um conjunto de instruções e códigos
 A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
 
 # a) Introdução
-O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários de blockchain. 
+O problema principal a ser endereçado por esse trabalho diz respeito à extração e estruturação de dados de transações de bitcoin a partir de arquivos binários (hex) de blockchain. 
 
-![image](https://user-images.githubusercontent.com/50485300/202918868-de46ac2c-2253-4a99-a4bc-bab6590e7bd7.png)
+![image](https://user-images.githubusercontent.com/50485300/202920311-8ea4d4b1-5050-44da-b153-3fa055fd7ff8.png)
 
 O objetivo é extrair e estruturar as informações de transações de bitcoin a partir da blockchain para seu posterior uso em trabalho futuro,o qual envolverá a análise dos padrões temporais das transações por carteira de bitcoin com o intuito de identificação de fraudes. O foco nesse momento é estabelecer a infraestrutura capaz de fazer a extração e estruturação das informações de transações de bitcoin de maneira eficiente e automatizada.
 
