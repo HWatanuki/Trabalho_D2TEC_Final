@@ -71,6 +71,62 @@ Para a implementação da infraestrutura optou-se por utilizar um paradigma IaC 
  1) Módulo de implementação dos Azure File Shares: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Setup/storage
  2) Módulo de implementação do AKS/HPCC Systems: https://github.com/HWatanuki/Trabalho_D2TEC_Final/tree/main/Setup/aks
 
+## Pré-requisitos
+
+Toda a implementação pode ser via uma interface de linha de comando (CLI). Por questões de praticidade, recomenda-se o uso do Git Bash. Além disso, as seguintes ferramentas devem estar disponíveis no ambiente CLI escolhido:
+
+* Terraform (https://www.terraform.io/downloads.html)
+
+* Kubectl (https://kubernetes.io/releases/download/)
+
+* Azure Command Line tools (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+
+Obs.: Esse módulo cria uma storage account na sua subscrição Azure padrão. Você pode verificar a sua subscrição atual na interface de linha de comando usando o comando `az account list --output table`.  Para espeficiar uma subscrição, use o comando `az account set --subscription "My Subscription"`.
+
+Obs2.: Caso você não seja o proprietário da subscrição, é necessário ter pelo menos o papel de `Contributor` e permissões de escrita `Microsoft.Authorization/*/Write` e deleção `Microsoft.Authorization/*/Delete` na subscrição.
+
+## Instruções de uso do módulo
+
+1. Faça login na Azure via CLI.
+  * `az login`
+2. Clone esse repositório no seu PC e entre no diretório do repositório clonado.
+  * `git clone https://github.com/HWatanuki/Trabalho_D2TEC_Final.git`
+  * `cd Trabalho_D2TEC_Final/Setup`
+3. Implementação dos Azure File Shares.
+    3.1 Mude para o diretório dos módulos de implementação do storage.
+      * `cd Trabalho_D2TEC_Final/Setup/storage`
+    3.2 Avalie os parâmetros de customização dos File Shares (tais como região, tamanhos, tags, etc) no arquivo terraform.tfvars
+      * `vi terraform.tfvars`
+    3.3 Inicialize os módulos do Terraform.
+      * `terraform init`
+    3.4 Crie um plano de execução e pre-visualize as ações a serem feitas pelo Terraform.
+      * `terraform plan -out ifsp_plan`
+    3.5 Execute o plano de implementação via Terraform.
+      * `terraform apply "ifsp_plan"` (Digite `yes` quando questionado para iniciar a construção do ambiente)
+4. Implementação dos clusters Kubernetes/HPCC Systems.
+    4.1 Mude para o diretório dos módulos de implementação do AKS.
+      * `cd Trabalho_D2TEC_Final/Setup/aks`
+    4.2 Avalie os parâmetros de customização dos clusters (tais como região, quantidade de nós, tags, etc) no arquivo terraform.tfvars
+      * `vi terraform.tfvars`
+    4.3 Inicialize os módulos do Terraform.
+      * `terraform init`
+    4.4 Crie um plano de execução e pre-visualize as ações a serem feitas pelo Terraform.
+      * `terraform plan -out ifsp_plan`
+    4.5 Execute o plano de implementação via Terraform.
+      * `terraform apply "ifsp_plan"` (Digite `yes` quando questionado para iniciar a construção do ambiente). 
+5. Dentro de alguns minutos toda a infraestrutura estará criada na Azure de acordo com os parâmetros especificados no arquivo terraform.tfvars. Para logar no cluster HPCC Systems, abra um navegador de internet e utilize a seguinte URL `https:\\<IP>:8010\`, sendo que o endereço de IP está disponível via kubectl. 
+
+  * `kubectl get services | grep eclwatch | awk '{print$4}'`
+
+## Dicas úteis
+
+* Caso a implementação via Terraform falhe por algum motivo e você queira reinicializar desde o início, duas alternativas estão disponiveis:
+	* Execute o comando `terraform destroy` a partir do subdiretorio que contém os módulos a serem removidos.
+	* Remova os recursos manualmente:
+		* Faça login no Azure portal e remova os grupos de recursos manualmente.
+		* Remova todos os arquivos de estado do Terraform usando o comando `rm *.tfstate*` a partir do subdiretorio que contém os módulos a serem removidos.
+* Caso queira reinicializar completamente o Terraform, execute `rm -rf .terraform* *.tfstate*` e em seguida `terraform init` a partir do subdiretorio que contém os módulos a serem reinicializados.
+
 # f) Pipeline de dados
 O tratamento dos dados objetivou extrair e estruturar os dados primários de transações bitcoin presentes nos blocos dos arquivos blk.dat.
 Para isso, os arquivos blk.dat foram importados na plataforma HPCC Systems como Blob's (binary large object) e um código python foi utilizado como base para extrair e estruturar os dados primários contidos nos arquivos blk.dat.
@@ -116,7 +172,30 @@ Visualização do dataset estruturado
 ![image](https://user-images.githubusercontent.com/50485300/202890959-d9608090-3616-4dc8-8703-045645c7b2ce.png)
 
 # g) Cleanup
-Como a implementação da infraestrutura foi feita via Terraform, para a remoção dos recursos utilizados na Azure basta utilizar o comando "terraform destroy" a partir de cada subdiretório que contém os códigos para implementaçao do storage e do AKS.
+Como a implementação da infraestrutura foi feita via Terraform, para a remoção dos recursos utilizados na Azure basta utilizar o comando `terraform destroy` a partir de cada subdiretório que contém os códigos para implementaçao do storage e do AKS.
+
+## Instruções para remoção dos recursos via Terraform
+
+1. Faça login na Azure via CLI.
+  * `az login`
+2. Entre no diretório do repositório clonado.
+  * `cd Trabalho_D2TEC_Final/Setup`
+3. Remoção dos Azure File Shares.
+    3.1 Mude para o diretório dos módulos do storage.
+      * `cd Trabalho_D2TEC_Final/Setup/storage`
+    3.2 Execute o plano de remoção dos File Shares.
+      * `terraform destroy` (Digite `yes` quando questionado para iniciar a remoção dos recursos)
+4. Remoção dos clusters Kubernetes/HPCC Systems.
+    4.1 Mude para o diretório dos módulos do AKS.
+      * `cd Trabalho_D2TEC_Final/Setup/aks`
+    4.2 Execute o plano de remoção dos File Shares.
+      * `terraform destroy` (Digite `yes` quando questionado para iniciar a remoção dos recursos)
+
+## Instruções para remoção dos recursos via Azure Portal
+
+Caso a remoção via Terraform falhe por algum motivo, você pode remover os recursos manualmente:
+		* Faça login no Azure portal e remova os grupos de recursos manualmente.
+		* Remova todos os arquivos de estado do Terraform usando o comando `rm *.tfstate*` a partir do subdiretorio que contém os módulos a serem removidos.
 
 # f) Referências
 
