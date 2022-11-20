@@ -4,8 +4,8 @@ Trabalho final da disciplina D2TEC - Tecnologias de Big Data do curso de Especia
 # Aluno: 
 - Hugo Martinelli Watanuki
 
-# ETL de dados blockchain usando infraestrutura AZURE
-O objetivo deste repositório é fornecer um conjunto de instruções, arquivos de configuração e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos da AZURE. 
+# ETL de dados blockchain usando infraestrutura Azure
+O objetivo deste repositório é fornecer um conjunto de instruções, arquivos de configuração e códigos para a criação de uma infraestutrura de processamento e análise de dados brutos de blockchain usando recursos da Azure. 
 
 A demonstração do passo a passo completo para a construção dessa infraestrutura está disponível aqui: https://youtu.be/vlRkAsbyuNI
 
@@ -19,20 +19,58 @@ Em virtude do volume e do formato dos dados brutos, optou-se por utilizar uma es
 # b) Descrição dos dados
 A base de dados utilizada no trabalho corresponde ao blockchain de bitcoin (~7 GB). O blockchain, por sua vez, é armazenado em arquivos binários blk.dat localizados nos nós computacionais pertencentes à rede de bitcoin (https://bitcoin.org/en/download). Cada arquivo blk.dat (~128 MB) contém blocos de dados brutos que são recebidos pelo nó da rede de bitcoin e ficam armazenados no diretório ~/.bitcoin/blocks/:
 
+![image](https://user-images.githubusercontent.com/50485300/202885667-15e9e589-e7bb-4cf2-802c-a0a7bf1f9a4c.png)
+
+Os dados contidos nos arquivos blk.dat estão armazenados em formato binário, conforme ilustrado abaixo nos primeiros 293 bytes do arquivo blk0000.dat:
+
+![image](https://user-images.githubusercontent.com/50485300/202885772-4c03915e-2fff-41ac-b1ee-e9849c952e6a.png)
+
+E cada bloco constituinte do arquivo blk.dat possui uma estrutura binária que pode ser dividida em cinco partes principais:
+
+![image](https://user-images.githubusercontent.com/50485300/202885824-5bf8dde3-285d-4fe3-853b-f5c93d1647a5.png)
+
+- Magic byte: determina a posição inicial e final de cada bloco
+- Size: tamanho do bloco
+- Block header: contém metadados diversas, tais como versão do bloco (4 bytes), hash do bloco anterior (32 bytes), hash de todas as transações do bloco (32 bytes), hora em que o bloco foi minerado (4 bytes), o alvo da mineraçao (4 bytes) e o campo para mineração (4 bytes).
+- Tx count: número de transações existentes no bloco
+- Transaction data: hash das informações das transações
+
+Para as análises apresentadas a seguir foram selecionados 3 arquivos blk.dat, os quais estão disponibilizados aqui:  https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Datasets
+
+# c) Workflow
+A solução criada para a extração e estruturação dos dados de blockchain utilizou os seguintes componentes principais:
+- Azure File Shares: https://azure.microsoft.com/en-us/products/storage/files/#overview
+- Azure Kubernetes Service (AKS): https://azure.microsoft.com/en-us/products/kubernetes-service/
+- High Performance Computing Cluster (HPCC Systems): https://hpccsystems.com/
+
+O diagrama de arquitetura Azure implementada é apresentado abaixo:
+
+![image](https://user-images.githubusercontent.com/50485300/200107439-bf0d4e86-3b02-4c0d-ab3d-927c3134d172.png)
 
 
+# d) Infraestrutura
+A infrastrutura foi criada na região us-east-2 e envolveu os seguintes recursos:
+- 1 usuário Identity and Access Management (IAM) com permissões para administrar clusters EKS (https://docs.aws.amazon.com/eks/latest/userguide/security-iam.html)
+- 1 Virtual Private Cloud (VPC) padrão da AWS com subnets públicas em cada zona de disponibilidade (https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
+- 4 nós t3.medium com 2 vCPUs e 4 GiB de memória (https://aws.amazon.com/ec2/instance-types/t3/)
+- 5 volumes de 1 GB cada para armazenamento de dados no EFS
 
-Essa base contém registros de viagens de passageiros de taxi da cidade de Nova York com os seguintes atributos:
-- Local, data e hora da partida e chegada de cada viagem
-- Distância, custo, tarifa e número de passageiros de cada viagem
+# d) Scripts de consulta dos dados
 
-Para as análises foram selecionados 2 datasets:
-- 1 dataset contendo as viagens realizadas no mês de Janeiro de 2017 (escolha aleatoria apenas para exemplificar a analise): 9.710.124 registros
-- 1 dataset contendo os códigos e descrições das áreas da cidade de Nova York: 265 registros
+O tratamento e análise dos dados objetivou proporcionar a um motorista de taxi da cidade de NY insumos para uma estratégia de trabalho. 
+Para isso, uma vez tratados os dados, os mesmos serviram para um entendimento sobre o padrao das viagens ao longo dos dias e horas do mes, bem como as regioes com as viagens e gorjetas mais elevadas. 
+Por fim, uma funcao foi elaborada com base nos dados historicos medios para permitir ao motorista estimar o valor, duracao e distancia de uma viagem com base no local de embarque/desembarque, dia e hora de inicio da viagem. 
 
-Os datasets utilizados estão disponíveis aqui: https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Datasets
+Os códigos utilizados para tratament e consultas dos dados estão disponíveis aqui: https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Codigos
 
-O schema do dataset de viagens possui a seguinte estrutura:
+A demonstração das analises está disponível aqui: https://youtu.be/Kx29WY3P9MY
+
+1) Limpeza e padronização dos dados com o objetivo de tratar os campos de data e hora, bem como alterar os tipos dos campos da tabela:
+
+ ![image](https://user-images.githubusercontent.com/50485300/200211343-a1dfb689-12ad-4c3a-9d1e-9f440507fc24.png)
+ 
+ 
+ O schema do dataset de viagens possui a seguinte estrutura:
 
     STRING VendorID; // codigo indicando a companhia associada a viagem
     STRING tpep_pickup_datetime; // data e hora do embarque
@@ -56,55 +94,6 @@ Visualizacao do dataset de viagens bruto
 
 ![image](https://user-images.githubusercontent.com/50485300/200210322-6899b9c8-8b80-4789-822e-d1e9237e0769.png)
 
-O schema do dataset de bairros de NY possui a seguinte estrutura:
-  
-    STRING LocationID;  // Codigo identificador das zonas de taxi
-    STRING Borough; // Bairro da zona
-    STRING Zone; // Nome da zona
-    STRING service_zone; // Categoria de servico da zona
-  
-Visualizacao do dataset de bairros de NY bruto
-
-![image](https://user-images.githubusercontent.com/50485300/200210396-e4403d5e-bd37-443e-a7ff-7d8c9c2b1a54.png)
-
-
-Visão geral da solução
-A solução criada foi baseada em um paradigma de microserviços em nuvem. Para isso, foram utilizados os seguintes componentes principais:
-- 1 Elastic File System (EFS): https://aws.amazon.com/efs/
-- 1 Elastic Kubernetes Services (EKS): https://aws.amazon.com/eks/
-- 1 High Performance Computing Cluster (HPCC Systems): https://hpccsystems.com/
-
-O diagrama de arquitetura AWS implementada é apresentado abaixo:
-
-![image](https://user-images.githubusercontent.com/50485300/200107439-bf0d4e86-3b02-4c0d-ab3d-927c3134d172.png)
-
-   em formato blk.dat gerado pelo nó bitcoin e analisá-los em um conjunto de dados utilizável. Para isso adotamos uma estratégia em que utilizamos uma combinação de Python + ECL
-Os dados são primeiro analisados em uma forma intermediária com valores disponibilizados nos dados do bloco com recursos que incluem
-
-
-# b) Infraestrutura utilizada
-A infrastrutura foi criada na região us-east-1 e envolveu os seguintes recursos:
-- 1 usuário Identity and Access Management (IAM) com permissões para administrar clusters EKS (https://docs.aws.amazon.com/eks/latest/userguide/security-iam.html)
-- 1 Virtual Private Cloud (VPC) padrão da AWS com subnets públicas em cada zona de disponibilidade (https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
-- 4 nós t3.medium com 2 vCPUs e 4 GiB de memória (https://aws.amazon.com/ec2/instance-types/t3/)
-- 5 volumes de 1 GB cada para armazenamento de dados no EFS
-
-
-
-
-# d) Scripts de consulta dos dados
-
-O tratamento e análise dos dados objetivou proporcionar a um motorista de taxi da cidade de NY insumos para uma estratégia de trabalho. 
-Para isso, uma vez tratados os dados, os mesmos serviram para um entendimento sobre o padrao das viagens ao longo dos dias e horas do mes, bem como as regioes com as viagens e gorjetas mais elevadas. 
-Por fim, uma funcao foi elaborada com base nos dados historicos medios para permitir ao motorista estimar o valor, duracao e distancia de uma viagem com base no local de embarque/desembarque, dia e hora de inicio da viagem. 
-
-Os códigos utilizados para tratament e consultas dos dados estão disponíveis aqui: https://github.com/HWatanuki/Trabalho_D2TEC/tree/main/Codigos
-
-A demonstração das analises está disponível aqui: https://youtu.be/Kx29WY3P9MY
-
-1) Limpeza e padronização dos dados com o objetivo de tratar os campos de data e hora, bem como alterar os tipos dos campos da tabela:
-
- ![image](https://user-images.githubusercontent.com/50485300/200211343-a1dfb689-12ad-4c3a-9d1e-9f440507fc24.png)
 
 2) JOIN com a tabela de bairros de NY com o intuito de substituir os codigos de embarque e desembarque pelos nomes das regioes:
 
